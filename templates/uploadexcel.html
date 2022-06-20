@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block title %}Parish Football{% endblock %} {% block content
+    %}
+    <div class="hero text-center">
+        <h1>Parish Episcopal</h1>
+        <p>Upload More Data</p>
+      </div>
+      <div class='container'>
+        <br>
+        <form method='post' action='/upload-data' enctype='multipart/form-data'>
+            <div class='form-group'>
+                <label>Browse Excel File</label>
+                <input type='file' class='form-control-file' name='new_file' value= "" required>
+                <input type='text' placeholder='School Name' name='new_opponent' value=""required>
+                <input type='text' placeholder='Date' name='new_date' required>
+                <input class='btn btn-default' type='submit' value="Upload">
+            </div>
+
+          
+        </form>
+        {% if error %}
+          <p class='error'><strong>Error</strong> {{ error }}</p>
+        {% endif %}  
+      </div>
+      
+            
+          
+    
+    </div>
+    <footer class="footer">
+      <span class="bottom">Parish Football</span>
+    </footer>
+  
+  {% endblock %}

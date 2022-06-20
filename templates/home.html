@@ -1,0 +1,186 @@
+{% extends "base.html" %} {% block title %}Parish Football{% endblock %} {% block content
+    %}
+    
+      <div class="container">
+        <div class="row margin-top-50">
+          <div class="col-md-2">
+            <aside class="filters">
+              <div class="panel panel-default">
+                <div class="panel-heading">Filter Search</div>
+                <div class="panel-body">
+                  <form action='' method='post'>
+                    <div class="form-group">
+                      <ul class="list-group" id="filters">
+                        <li class="filter list-group-item">
+                          <label for="opponent">Enter a School</label>
+                          <input class="form-control" name='opponent' id="opponent" type="text" placeholder="Midland">
+                        </li>
+                        <li class="filter list-group-item">
+                          <label for="date1">Enter a Start Date</label>
+                          <input class="form-control" name="date1" type="date" placeholder="12/16/2021">
+                        </li>
+                        <li class="filter list-group-item">
+                          <label for="date2">Enter a End Date</label>
+                          <input class="form-control" name="date2" type="date" placeholder='12/23/2021'>
+                        </li>
+                        <li class="filter list-group-item">
+                          <label for="down">Enter a Down</label>
+                          <input class="form-control" name="down" type="text" placeholder="1">
+                        </li>
+                        <li class="filter list-group-item">
+                          <label for="distance">Enter a Distance</label>
+                          <input class="form-control" name="distance" type="text" placeholder="SHORT">
+                        </li>
+                        <li class="filter list-group-item">
+                          <label for="fieldposition">Enter a Field Position</label>
+                          <input class="form-control" name="fieldposition" type="text" placeholder="-21 to -39">
+                        </li>
+                        <li class="filter list-group-item">
+                          <label for="blitz">Enter a Blitz</label>
+                          <input class="form-control" name="blitz" type="text" placeholder="JET">
+                        </li>
+                        <li class="filter list-group-item">
+                          <label for="offensiveform">Enter a Offensive Form</label>
+                          <input class="form-control" name="offensiveform" type="text" placeholder="TREY">
+                        </li>
+                        <li class="filter list-group-item">
+                          <label for="defensivefront">Enter a Defensive Front</label>
+                          <input class="form-control" name="defensivefront" type="text" placeholder="EVEN">
+                        </li>
+                      </ul>
+                    </div>
+                    <button id="filter-btn" type="submit" class="btn btn-default">Filter Table</button>
+                    <!-- <button id="clear-btn" type="button" class="btn btn-default">Clear Filters</button> -->
+                  </form>
+                </div>
+              </div>
+            </aside>
+          </div>
+          <div class="col-md-10">
+            <div id="table-area" class="">
+              <caption>
+              </h1> Game Data </h1>
+            </caption>
+              <table id="def-table" class="table table-striped">
+                
+                <thead>
+                  <tr>
+                    {% for col in column_names %}
+                    <th>
+                    
+                      {{col}}
+                     
+                    </th>
+                    {% endfor %}
+                  </tr>
+        
+                </thead>
+                <tbody>
+                  {% for row in row_data %}
+                  <tr>
+                    {% for col, row_ in zip(column_names, row) %}
+                    <td>{{row_}}</td>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+        
+                 
+                </tbody>
+          
+              </table>
+            </div>
+            <div id="table-area" class="">
+              <caption>Blitz Stats</caption>
+              <table id="blitz-table" class="table table-striped">
+                <thead>
+                  <tr>
+                    {% for col in blitz_column_names %}
+                    <th>
+                    
+                      {{col}}
+                     
+                    </th>
+                    {% endfor %}
+                  </tr>
+        
+                </thead>
+                <tbody>
+                  {% for row in blitz_row_data %}
+                  <tr>
+                    {% for col, row_ in zip(blitz_column_names, row) %}
+                    <td>{{row_}}</td>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+        
+                 
+                </tbody>
+          
+              </table>
+            </div>
+            <div id="table-area" class="">
+              <caption>Stunt Stats</caption>
+              <table id="stunt-table" class="table table-striped">
+                <thead>
+                  <tr>
+                    {% for col in stunt_column_names %}
+                    <th>
+                    
+                      {{col}}
+                     
+                    </th>
+                    {% endfor %}
+                  </tr>
+        
+                </thead>
+                <tbody>
+                  {% for row in stunt_row_data %}
+                  <tr>
+                    {% for col, row_ in zip(stunt_column_names, row) %}
+                    <td>{{row_}}</td>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+        
+                 
+                </tbody>
+          
+              </table>
+            </div>
+            <div id="table-area" class="">
+              <caption>Coverage Stats</caption>
+              <table id="coverage-table" class="table table-striped">
+                <thead>
+                  <tr>
+                    {% for col in coverage_column_names %}
+                    <th>
+                    
+                      {{col}}
+                     
+                    </th>
+                    {% endfor %}
+                  </tr>
+        
+                </thead>
+                <tbody>
+                  {% for row in coverage_row_data %}
+                  <tr>
+                    {% for col, row_ in zip(coverage_column_names, row) %}
+                    <td>{{row_}}</td>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+        
+                 
+                </tbody>
+          
+              </table>
+            </div>
+        </div>   
+    
+    </div>
+    <footer class="footer">
+      <span class="bottom">Parish Football</span>
+    </footer>
+  
+  {% endblock %}

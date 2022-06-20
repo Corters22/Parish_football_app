@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %}Log-in{% endblock %} {% block content
+    %}
+    <div class="hero text-center">
+        <h1>Parish Episcopal</h1>
+        <p>Varsity Football Stats</p>
+    </div>
+    <div class='container'>
+        <h1>Please login</h1>
+        <br>
+        <form action="" method='post'>
+          <input type='text' placeholder="Username" name='username' value= "">
+          <input type='password' placeholder='Password' name='password' value="">
+          <input class='btn btn-default' type='submit' value="Login">
+        </form>
+        {% if error %}
+          <p class='error'><strong>Error</strong> {{ error }}</p>
+        {% endif %}  
+      </div>
+      {% endblock %}
