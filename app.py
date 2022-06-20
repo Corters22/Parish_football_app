@@ -12,7 +12,7 @@ from sqlalchemy import create_engine, func, Column, Integer, String, Date
 from flask import Flask
 from flask_marshmallow import Marshmallow
 from marshmallow import Schema, fields
-from pprint import pprint
+#from pprint import pprint
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
