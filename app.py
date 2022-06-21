@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
+from flask_login import login_required
 
 from sqlalchemy.sql import func
 
@@ -16,7 +17,7 @@ from marshmallow import Schema, fields
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from config import user, password, port, db
+from config import user, password, port, db, username, app_password
 
 
 import functions
@@ -90,21 +91,22 @@ class FootballSchema(Schema):
 
 schema = FootballSchema(many=True)
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/login', methods = ['GET', 'POST'])
 def login():
     error=None
     if request.method == 'POST':
-        if request.form['username'] != 'JHeath' or request.form['password'] != 'Parish!':
+        if request.form['username'] != username or request.form['password'] != app_password:
             error='Invalid Credentials. Please try again.'
         else:
             query = db.session.query(Football)
             data = pd.read_sql(query.statement, db.session.connection())
-            return render_template('home.html', column_names = data.columns.values, 
-                row_data = list(data.values.tolist()), zip = zip)
+            return redirect(url_for('full_data', column_names = data.columns.values, 
+                row_data = list(data.values.tolist()), zip = zip))
             
     return render_template('login.html', error=error)
 
 @app.route('/home')
+@login_required
 def full_data():
     query = db.session.query(Football)
     data = pd.read_sql(query.statement, db.session.connection())
@@ -113,6 +115,7 @@ def full_data():
 
 
 @app.route('/home', methods = ['GET', 'POST'])
+@login_required
 def filter_data():
     if request.method == 'POST':
         school = request.form['opponent']
