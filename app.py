@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
-from flask_login import login_required
+#from flask_login import login_required, LoginManager
 
 from sqlalchemy.sql import func
 
@@ -91,6 +91,10 @@ class FootballSchema(Schema):
 
 schema = FootballSchema(many=True)
 
+#manage login information
+# login_manager = LoginManager()
+# login_manager.init_app(app)
+
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     error=None
@@ -106,7 +110,7 @@ def login():
     return render_template('login.html', error=error)
 
 @app.route('/home')
-@login_required
+#@login_required
 def full_data():
     query = db.session.query(Football)
     data = pd.read_sql(query.statement, db.session.connection())
@@ -115,7 +119,7 @@ def full_data():
 
 
 @app.route('/home', methods = ['GET', 'POST'])
-@login_required
+#@login_required
 def filter_data():
     if request.method == 'POST':
         school = request.form['opponent']
@@ -147,14 +151,14 @@ def filter_data():
 # @app.route('/upload-data', methods = ['GET', 'POST'])
 # def add_data():
 #     if request.method == 'POST':
-#         new_file = request.file['new_file']
+#         new_file = request.files['new_file']
 #         new_date = request.form['new_date']
 #         new_opponent = request.form['new_opponent']
 #         #filename = secure_filename(new_file.filename)
 #         if new_file:
 #             with open(new_file) as file:
 #             #new_file.save(os.path.join(app.config('UPLOAD_FOLDER'), 'New_file'))
-
+            #file = pd.read_excel(files_excel(new_file))
 #         # print(new_date, new_opponent)
 
 #                 file2 = functions.add_binned_columns(file)
