@@ -17,7 +17,7 @@ from marshmallow import Schema, fields
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from config import user, password, port, db, username, app_password
+from config import user, password, port, db, username, app_password,uri
 
 
 import functions
@@ -28,8 +28,8 @@ app = Flask(__name__)
 
 
 url = f'postgresql://{user}:{password}@localhost:{port}/{db}'
-engine = create_engine(url)
-app.config['SQLALCHEMY_DATABASE_URI'] = url
+engine = create_engine(uri)
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
 db = SQLAlchemy(app)
 
