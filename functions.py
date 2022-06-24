@@ -1,5 +1,5 @@
 import pandas as pd
-from app import engine, session, Football, schema, db
+from app import session, Football, schema, db
 from sqlalchemy import func
 
 #function to add columns for distance and field position categories
