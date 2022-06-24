@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
+import psycopg2
 #from flask_login import login_required, LoginManager
 
 from sqlalchemy.sql import func
@@ -46,8 +47,8 @@ db = SQLAlchemy(app)
 
 Base = declarative_base()
 
-Session = sessionmaker(bind=engine)
-session = Session
+# Session = sessionmaker(bind=engine)
+# session = Session
 
 #create table model
 class Football(db.Model):
@@ -125,7 +126,8 @@ def add_data(new_file, new_date, new_opponent):
     from sqlalchemy import create_engine
  
     
-    conn = engine.connect()
+    #conn = engine.connect()
+    conn = psycopg2.connect(uri)
     
     new_file.rename(columns={'QTR': 'qtr','PLAY #':'play_no', 'DN':'dn','DIST':'dist',
                              'YARD LN': 'yard_ln', 'OFF FORM': 'off_form', 'DEF FRONT': 'def_front',
@@ -149,10 +151,10 @@ def add_data(new_file, new_date, new_opponent):
     new_file.to_sql('football_data', con=conn , if_exists='append', index=False)
     
     #delete blank row
-    query = session.query(Football).filter(Football.qtr.is_(None)).delete()
+    query = db.session.query(Football).filter(Football.qtr.is_(None)).delete()
     
-    session.commit()
-    #session.close()
+    db.session.commit()
+    db.session.close()
 
 
 #function to filter data with post from html
