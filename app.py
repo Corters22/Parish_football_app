@@ -24,10 +24,17 @@ from sqlalchemy.orm import sessionmaker
 
 app = Flask(__name__)
 
+
+
 #connect to database
 
-uri = 'postgres://zimnwcywuosrtt:ff518e8bd538f2c8e5663077bcfd32bbba8488cad00e0495f2642819983a5443@ec2-23-23-182-238.compute-1.amazonaws.com:5432/dcbf9qrp2js5li'
+url = 'postgres://zimnwcywuosrtt:ff518e8bd538f2c8e5663077bcfd32bbba8488cad00e0495f2642819983a5443@ec2-23-23-182-238.compute-1.amazonaws.com:5432/dcbf9qrp2js5li'
 # url = f'postgresql://{user}:{password}@localhost:{port}/{db}'
+
+#from heroku fixing connection to database
+uri = os.getenv(url)  # or other relevant config var
+if uri and uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
 engine = create_engine(uri)
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
