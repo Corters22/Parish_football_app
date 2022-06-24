@@ -17,7 +17,7 @@ from marshmallow import Schema, fields
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from config import user, password, port, db, username, app_password,uri
+# from config import user, password, port, db, username, app_password,uri
 
 
 import functions
@@ -26,10 +26,10 @@ app = Flask(__name__)
 
 #connect to database
 
-
-url = f'postgresql://{user}:{password}@localhost:{port}/{db}'
+uri = 'postgres://zimnwcywuosrtt:ff518e8bd538f2c8e5663077bcfd32bbba8488cad00e0495f2642819983a5443@ec2-23-23-182-238.compute-1.amazonaws.com:5432/dcbf9qrp2js5li'
+# url = f'postgresql://{user}:{password}@localhost:{port}/{db}'
 engine = create_engine(uri)
-app.config['SQLALCHEMY_DATABASE_URI'] = uri = 'postgres://zimnwcywuosrtt:ff518e8bd538f2c8e5663077bcfd32bbba8488cad00e0495f2642819983a5443@ec2-23-23-182-238.compute-1.amazonaws.com:5432/dcbf9qrp2js5li'
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
 db = SQLAlchemy(app)
 
@@ -90,6 +90,9 @@ class FootballSchema(Schema):
     opponent = fields.Str()
 
 schema = FootballSchema(many=True)
+
+username = 'JHeath'
+app_password = 'Parish!'
 
 #manage login information
 # login_manager = LoginManager()
