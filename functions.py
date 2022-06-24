@@ -18,7 +18,7 @@ def add_binned_columns(new_file):
 
 
 #function to add new data to database
-def add_data(new_file, new_date, new_opponent):
+# def add_data(new_file, new_date, new_opponent):
     from sqlalchemy import create_engine
  
     
@@ -58,7 +58,7 @@ def filter_function(school, start_date, end_date, defensive_front, blitz, down,
     
     import json
     
-    conn = engine.connect()
+    # conn = engine.connect()
     
     query = db.session.query(Football.qtr, Football.play_no, Football.dn, Football.dist, 
                          Football.yard_ln, Football.off_form, Football.def_front, 
