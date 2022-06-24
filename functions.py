@@ -1,6 +1,11 @@
 import pandas as pd
 from app import session, Football, schema, db
-from sqlalchemy import func
+from sqlalchemy import func, create_engine
+from sqlalchemy.orm import sessionmaker
+
+uri = 'postgres://zimnwcywuosrtt:ff518e8bd538f2c8e5663077bcfd32bbba8488cad00e0495f2642819983a5443@ec2-23-23-182-238.compute-1.amazonaws.com:5432/dcbf9qrp2js5li'
+engine = create_engine(uri)
+session = sessionmaker(bind=engine)
 
 #function to add columns for distance and field position categories
 def add_binned_columns(new_file):
@@ -18,7 +23,7 @@ def add_binned_columns(new_file):
 
 
 #function to add new data to database
-# def add_data(new_file, new_date, new_opponent):
+def add_data(new_file, new_date, new_opponent):
     from sqlalchemy import create_engine
  
     
