@@ -36,7 +36,7 @@ url = 'postgres://zimnwcywuosrtt:ff518e8bd538f2c8e5663077bcfd32bbba8488cad00e049
 uri = os.getenv(url)  # or other relevant config var
 if uri and uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
-engine = create_engine(uri)
+#engine = create_engine(uri)
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
 db = SQLAlchemy(app)
@@ -123,7 +123,7 @@ def add_binned_columns(new_file):
 
 #function to add new data to database
 def add_data(new_file, new_date, new_opponent):
-    from sqlalchemy import create_engine
+    #from sqlalchemy import create_engine
  
     
     #conn = engine.connect()
