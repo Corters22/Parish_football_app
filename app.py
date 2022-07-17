@@ -38,6 +38,12 @@ if uri and uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
 #engine = create_engine(uri)
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+DATABASE_URL = os.environ['DATABASE_URL']
+
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 db = SQLAlchemy(app)
 
@@ -45,14 +51,14 @@ db = SQLAlchemy(app)
 # UPLOAD_FOLDER = 'static/uploads'
 # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-Base = declarative_base()
+#Base = declarative_base()
 
 # Session = sessionmaker(bind=engine)
 # session = Session
 
 #create table model
 class Football(db.Model):
-    __tablename__ = 'football_data'
+    #__tablename__ = 'football_data'
     
     id = Column(Integer, primary_key = True)
     qtr = Column(Integer)
