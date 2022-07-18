@@ -29,18 +29,18 @@ app = Flask(__name__)
 
 #connect to database
 
-url = 'postgres://zimnwcywuosrtt:ff518e8bd538f2c8e5663077bcfd32bbba8488cad00e0495f2642819983a5443@ec2-23-23-182-238.compute-1.amazonaws.com:5432/dcbf9qrp2js5li'
-# url = f'postgresql://{user}:{password}@localhost:{port}/{db}'
+# url = 'postgres://zimnwcywuosrtt:ff518e8bd538f2c8e5663077bcfd32bbba8488cad00e0495f2642819983a5443@ec2-23-23-182-238.compute-1.amazonaws.com:5432/dcbf9qrp2js5li'
+# # url = f'postgresql://{user}:{password}@localhost:{port}/{db}'
 
-#from heroku fixing connection to database
-uri = os.getenv(url)  # or other relevant config var
-if uri and uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
-#engine = create_engine(uri)
-app.config['SQLALCHEMY_DATABASE_URI'] = uri
+# #from heroku fixing connection to database
+# uri = os.getenv(url)  # or other relevant config var
+# if uri and uri.startswith("postgres://"):
+#     uri = uri.replace("postgres://", "postgresql://", 1)
+# #engine = create_engine(uri)
+# app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-
+#DATABASE_URL=$(heroku config:get DATABASE_URL -a your-app)
 DATABASE_URL = os.environ['DATABASE_URL']
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
@@ -133,7 +133,7 @@ def add_data(new_file, new_date, new_opponent):
  
     
     #conn = engine.connect()
-    conn = psycopg2.connect(uri)
+    #conn = psycopg2.connect(uri)
     
     new_file.rename(columns={'QTR': 'qtr','PLAY #':'play_no', 'DN':'dn','DIST':'dist',
                              'YARD LN': 'yard_ln', 'OFF FORM': 'off_form', 'DEF FRONT': 'def_front',
