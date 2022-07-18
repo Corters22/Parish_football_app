@@ -41,9 +41,9 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 #DATABASE_URL=$(heroku config:get DATABASE_URL -a your-app)
-DATABASE_URL = os.environ['DATABASE_URL']
-
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+SQLALCHEMY_DATABASE_URI = os.environ.get['DATABASE_URL']
+SECRET_KEY = os.environ.get('SECRET_KEY')
+conn = psycopg2.connect(SQLALCHEMY_DATABASE_URI, sslmode='require')
 
 db = SQLAlchemy(app)
 
